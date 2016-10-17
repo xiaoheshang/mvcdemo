@@ -1,0 +1,171 @@
+﻿@model demo1.ViewModels.YhEditDTO
+@{
+    ViewBag.Title = "修改用户信息";
+}
+
+@section css{
+}
+
+<div class="row">
+    <div class="col-xs-12"><h3 class="nav-title">修改用户信息</h3></div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="nav-item active">
+                <a href="#basic" role="tab" class="nav-link active" data-toggle="tab">基本信息</a>
+            </li>
+            <li role="presentation" class="nav-item">
+                <a href="#qx" role="tab" class="nav-link" data-toggle="tab">用户权限</a>
+            </li>
+            <li role="presentation" class="nav-item">
+                <a href="#js" role="tab" class="nav-link" data-toggle="tab">用户角色</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="basic">
+                @using (Html.BeginForm("Edit", "Yh", FormMethod.Post, new { id = "editForm" }))
+            {
+                    @Html.HiddenFor(model => model.yh.yhid)
+                    <div class="form-group">
+                        <label for="yhmc">用户名称</label>
+                        <p class="form-control-static">@Html.DisplayFor(model => model.yh.yhmc)</p>
+                        @Html.HiddenFor(model => model.yh.yhmc)
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yhmm">用户密码</label>
+                        @*@Html.PasswordFor(model=>model.yh.yhmm,new { @class = "form-control" })*@
+                        <input type="password" id="yhmm" name="yhmm" value="" class="form-control" />
+                        <span style="color:orangered;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="qryhmm">确认用户密码</label>
+                        @*@Html.PasswordFor(model => model.yh.yhmm, new { @class = "form-control",name="qryhmm" })*@
+                        <input type="password" id="qryhmm" name="qryhmm" value="" class="form-control" />
+                        <span style="color:orangered;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        @Html.EditorFor(model => model.yh.email, new { htmlAttributes = new { @class = "form-control", type = "email" } })
+                        @*<input type="email" name="email" class="form-control" />*@
+                        <span style="color:orangered;"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qq">QQ</label>
+                        @Html.EditorFor(model => model.yh.qq, new { htmlAttributes = new { @class = "form-control" } })
+                        @*<input type="text" name="qq" class="form-control" />*@
+                        <span style="color:orangered;"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lxdh">联系电话</label>
+                        @Html.EditorFor(model => model.yh.lxdh, new { htmlAttributes = new { @class = "form-control" } })
+                        @*<input type="text" name="lxdh" class="form-control" />*@
+                        <span style="color:orangered;"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zsxm">真实姓名</label>
+                        @Html.EditorFor(model => model.yh.zsxm, new { htmlAttributes = new { @class = "form-control" } })
+                        @*<input type="text" name="zsxm" class="form-control" />*@
+                        <span style="color:orangered;"></span>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(model => model.yh.islock)
+                            是否启用
+                        </label>
+                    </div>
+
+                    <input id="btnSave" type="button" class="btn btn-primary" value="保存" />
+                    @Html.ActionLink("返回", "List", null, new { @class = "btn btn-link" });
+            }
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="qx">
+                <form name="yhgnForm" id="yhgnForm" class="form-inline" action="Yh/YhgnEidt">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <th>功能</th>
+                            <th>操作</th>
+                        </tr>
+                        @foreach (var item in Model.yhgns)
+                        {
+                            <tr>
+                                <td>
+                                    @item.controllername
+                                </td>
+                                <td>
+                                    @foreach (var a in item.actions)
+                                    {
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" @if (a.isallow == true) { 
+                                                @:checked="checked" 
+                                            } name="@a.action" value="@a.gnid" />@a.actionname
+                                        </label>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                    <input type="button" id="btnYhgn" class="btn btn-primary" value="保存" />
+                </form>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="js">
+                <form name="yhjsForm" id="yhjsForm" action="/Yh/YhjsEdit">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>类别</th>
+                                    <th>角色名称</th>
+
+                                </tr>
+                                <tr>
+                                    <td>系统角色</td>
+                                    <td>
+                                    @foreach (var js in Model.yhjss)
+                                    {
+                                        <label class="checkbox-inline" title="@js.jssm">
+                                            <input type="checkbox" @if (js.isjs == true) { @: checked="checked"
+                                                                                               } name="@js.jsmc" value="@js.jsid" />@js.jsmc
+                                                                                        </label>
+                                    }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="button" id="btnYhjs" class="btn btn-primary" value="保存" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+
+    </div>
+</div>
+
+
+@section js{
+    <script src="~/Assets/scripts/jquery.validate.js"></script>
+    <script src="~/Assets/scripts/yhedit.js"></script>
+}
+

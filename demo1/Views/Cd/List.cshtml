@@ -1,0 +1,59 @@
+﻿@model IEnumerable<demo1.Model.cd>
+@{
+    ViewBag.Title = "查看系统菜单";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3 class="nav-title">@ViewBag.Title</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <form name="listForm" class="form-inline">
+            <div class="form-group">
+                <label for="cdjb">菜单级别</label>
+                <select name="cdjb" id="cdjb" class="form-control">
+                    <option value="1" @if (ViewBag.cdjb == 1) { @:selected="selected"
+                            }>系统</option>
+                    <option value="2" @if (ViewBag.cdjb == 2) { @:selected="selected"
+                            }>菜单</option>
+                    <option value="3" @if (ViewBag.cdjb == 3) { @:selected="selected"
+                            }>功能</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <a href="/Cd/Add" class="btn btn-primary">添加</a>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>菜单ID</th>
+                <th>菜单级别</th>
+                <th>上级菜单</th>
+                <th>对应功能</th>
+                <th>菜单名称</th>
+                <th>图标</th>
+            </tr>
+            @foreach (demo1.Model.cd cd in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(i=>cd.cdid)</td>
+                    <td>@Html.DisplayFor(i => cd.cdjb)</td>
+                    <td>@Html.DisplayFor(i => cd.sjcdid)</td>
+                    <td>@Html.DisplayFor(i => cd.gnid)</td>
+                    <td>@Html.DisplayFor(i => cd.cdmc)</td>
+                    <td>@Html.DisplayFor(i => cd.icon)</td>
+                </tr>
+            }
+            
+        </table>
+    </div>
+</div>
+@section js{
+    <script src="~/Assets/scripts/cdlist.js"></script>
+}
+

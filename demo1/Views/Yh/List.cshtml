@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "用户管理";
+}
+@section css{
+
+}
+<div>
+
+    
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>用户管理</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.ActionLink("添加用户", "Add",null, new { @class = "btn btn-primary btn-flat" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 table-responsive">
+                @model IEnumerable<demo1.Model.yh>
+                <table id="yhtable" class="table table-condensed table-hover">
+                    <tr>
+                        <th>用户id</th>
+                        <th>用户名称</th>
+                        <th>email</th>
+                        <th>qq</th>
+                        <th>联系电话</th>
+                        <th>真实姓名</th>
+                        <th>是否启用</th>
+                        <th>操作</th>
+                    </tr>
+                    @foreach (demo1.Model.yh yh in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(i => yh.yhid)</td>
+                            <td>@Html.DisplayFor(i => yh.yhmc)</td>
+                            <td>@Html.DisplayFor(i => yh.email)</td>
+                            <td>@Html.DisplayFor(i => yh.qq)</td>
+                            <td>@Html.DisplayFor(i => yh.lxdh)</td>
+                            <td>@Html.DisplayFor(i => yh.zsxm)</td>
+                            <td>@Html.DisplayFor(i => yh.islock)</td>
+                            <td>
+                                @Html.ActionLink("编辑", "Edit", new { yhid = yh.yhid }, new { @class = "btn btn-info btn-xs" })
+
+                                <a href="javascript:void(0);" class="btn btn-warning btn-xs btnDel" data-yh='{"yhid":@yh.yhid,"yhmc":"@yh.yhmc"}' title="删除用户">删除</a>
+
+                                @*@Html.ActionLink("删除", "Delete", new { yhid = yh.yhid }, new { @class = "btn btn-warning btn-xs",id="" })*@
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+</div>
+
+@section js{
+    <script src="~/Assets/scripts/yhlist.js"></script>
+    }
+

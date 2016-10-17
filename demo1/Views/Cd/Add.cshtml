@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "添加菜单";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3 class="nav-title">@ViewBag.Title</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form name="cdForm" id="cdForm" class="form-horizontal" action="/Cd/Add">
+            <div class="form-group">
+                <label for="cdjb" class="col-sm-2 width-4 control-label">菜单级别</label>
+                <div class="col-sm-10 width-12">
+                    <select name="cdjb" id="cdjb" class="form-control">
+                        <option value="1">系统</option>
+                        <option value="2">菜单</option>
+                        <option value="3">功能</option>
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="xtid" class="col-sm-2 width-4 control-label">所属系统</label>
+                <div class="col-sm-10 width-12">
+                    <select name="xtid" id="xtid" class="form-control">
+                        <option value="">无</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="sjcd" class="col-sm-2 width-4 control-label">上级菜单</label>
+                <div class="col-sm-10 width-12">
+                    <select name="sjcd" id="sjcd" class="form-control">
+                        <option value="">无</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="gnid" class="col-sm-2 width-4 control-label">对应功能</label>
+                <div class="col-sm-10 form-inline">
+                    <select name="controller" id="controller" class="form-control">
+                        <option value="">--无--</option>
+                    </select>
+                    <select name="action" id="action" class="form-control">
+                        <option value="">--无--</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cdmc" class="col-sm-2 width-4 control-label">菜单名称</label>
+                <div class="col-sm-10 width-12">
+                    <input type="text" name="cdmc" id="cdmc" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="xsjb" class="col-sm-2 width-4 control-label">显示级别</label>
+                <div class="col-sm-10 width-12">
+                    <select name="xsjb" id="xsjb" class="form-control">
+                        <option value="0">无</option>
+                        <option value="1">一级</option>
+                        <option value="2">二级</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="icon" class="col-sm-2 width-4 control-label">菜单图标</label>
+                <div class="col-sm-10 width-12">
+                    <div class="input-group">
+                        <input type="text" name="icon" id="icon" class="form-control" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">选择</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dkfs" class="col-sm-2 width-4 control-label">打开方式</label>
+                <div class="col-sm-10 width-12">
+                    <label class="radio-inline">
+                        <input type="radio" checked="checked" name="dkfs" value="1">当前窗口
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="dkfs" value="2">新窗口
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-2 width-4">
+
+                </div>
+                <div class="col-sm-10 width-12">
+                    <input type="button" id="btnAdd" class="btn btn-primary" value="添加" />
+                    <input type="button" class="btn btn-default" value="返回" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section js{
+<script src="~/Assets/scripts/jquery.validate.js"></script>
+    <script src="~/Assets/scripts/cdadd.js"></script>
+}
+

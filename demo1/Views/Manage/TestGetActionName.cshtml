@@ -1,0 +1,43 @@
+﻿@model IEnumerable<demo1.Model.gn>
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>TestGetActionName</title>
+    </head>
+    <body>
+        <div>
+            <table>
+                <tr>
+                    <th>gnid</th>
+                    <th>action</th>
+                    <th>controller</th>
+                    <th>actioname</th>
+                    <th>controllername</th>
+                    <th>method</th>
+                    <th>版本</th>
+                    <th>是否公共功能</th>
+                </tr>
+                @foreach (demo1.Model.gn gn in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(item=>gn.gnid)</td>
+                        <td>@Html.DisplayFor(item => gn.action)</td>
+                        <td>@Html.DisplayFor(item => gn.controller)</td>
+                        <td>@Html.DisplayFor(item => gn.actionname)</td>
+                        <td>@Html.DisplayFor(item => gn.controllername)</td>
+                        <td>@Html.DisplayFor(item => gn.method)</td>
+                        <td>@Html.DisplayFor(item => gn.version)</td>
+                        <td>@Html.DisplayFor(item => gn.ispublic)</td>
+                    </tr>
+                }
+                
+            </table>
+        </div>
+    </body>
+</html>

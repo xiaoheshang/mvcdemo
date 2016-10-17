@@ -1,0 +1,9 @@
+.btn.btn-flat {
+    border-radius: 2px;
+    transition: all .5s;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: initial;
+    transition-delay: initial;
+    border-color: transparent;
+}

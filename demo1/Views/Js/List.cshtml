@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "角色管理";
+}
+
+@section css{
+}
+<div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>@ViewBag.Title</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            @Html.ActionLink("添加角色", "Add", null, new { @class = "btn btn-primary btn-flat" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            @model IEnumerable<demo1.Model.js>
+            <table id="jstable" class="table table-condensed table-hover">
+                <tr>
+                    <th>角色id</th>
+                    <th>角色名称</th>
+                    <th>角色说明</th>
+                    <th>是否启用</th>
+                    <th>创建时间</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                </tr>
+                @foreach (demo1.Model.js js in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(i => js.jsid)</td>
+                        <td>@Html.DisplayFor(i => js.jsmc)</td>
+                        <td>@Html.DisplayFor(i => js.jssm)</td>
+                        <td>@Html.DisplayFor(i => js.islock)</td>
+                        <td>@Html.DisplayFor(i => js.cjtime)</td>
+                        <td>@Html.DisplayFor(i => js.gxtime)</td>
+                        <td>
+                            @Html.ActionLink("编辑", "Edit", new { jsid = js.jsid }, new { @class = "btn btn-info btn-xs" })
+
+                            <a href="javascript:void(0);" class="btn btn-warning btn-xs btnDel" data-js='{"jsid":@js.jsid,"jsmc":"@js.jsmc"}' title="删除角色">删除</a>
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+@section js{
+    <script src="~/Assets/scripts/jslist.js"></script>
+}
+

@@ -1,0 +1,62 @@
+﻿@model FormValidate.Models.Student2
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>使用注解方式-服务端表单验证</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("DataAnnotation", "Home", FormMethod.Post))
+        {
+            //使用viewData.ModelState.IsValid 来判断ModelState状态
+            if (ViewData.ModelState.IsValid)
+            {
+                if (ViewBag.Name != null)
+                {
+                    <strong>
+                        姓名：@ViewBag.Name <br />
+                        Email：@ViewBag.Email
+                    </strong>
+                }
+            }
+            <table>
+                <tr>
+                    <td><label for="name">姓名：</label></td>
+                    <td>
+                        <input type="text" name="name" />
+                        @*@if (!ViewData.ModelState.IsValid && ViewData.ModelState["name"].Errors.Count > 0)
+                        {
+                            <span style="color:#f00">@ViewData.ModelState["name"].Errors[0].ErrorMessage</span>
+                        }*@
+
+                        @Html.ValidationMessageFor(model => model.name)
+
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="email">email：</label></td>
+                    <td>
+                        <input type="text" name="email" />
+                        @*@if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"].Errors.Count > 0)
+                        {
+                            <span style="color:#f00">
+                                @ViewData.ModelState["email"].Errors[0].ErrorMessage
+                            </span>
+                        }*@
+
+                        @Html.ValidationMessageFor(model => model.email)
+                    </td>
+                </tr>
+            </table>
+
+            <p><input type="submit" value="添加" /></p>
+        }
+    </div>
+</body>
+</html>

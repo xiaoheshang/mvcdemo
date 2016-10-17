@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "功能管理";
+}
+@section css{
+    @*<link rel="stylesheet" type="text/css" href="~/Assets/css/bootstrap.css">*@
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/forms.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/tables.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/pagination.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/forms-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/buttons-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/tables-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/pagination-theme.css">
+}
+@model IEnumerable<demo1.Model.gn>
+<div class="row">
+    <div class="col-xs-12">
+        <h3>@ViewBag.Title</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <button type="button" id="btnInit" class="btn btn-primary btn-flat">初始化功能</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 table-responsive">
+        <table id="yhtable" class="table table-condensed table-hover">
+            <tr>
+                <th>功能id</th>
+                <th>控制器</th>
+                <th>action</th>
+                <th>控制器名称</th>
+                <th>action名称</th>
+                <th>请求方式</th>
+                <th>版本</th>
+                <th>添加时间</th>
+                <th>公共功能</th>
+                <th>禁用</th>
+                <th>操作</th>
+            </tr>
+            @foreach (demo1.Model.gn gn in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(i => gn.gnid)</td>
+                    <td>@Html.DisplayFor(i => gn.controller)</td>
+                    <td>@Html.DisplayFor(i => gn.action)</td>
+                    <td>@Html.DisplayFor(i => gn.controllername)</td>
+                    <td>@Html.DisplayFor(i => gn.actionname)</td>
+                    <td>@Html.DisplayFor(i => gn.method)</td>
+                    <td>@Html.DisplayFor(i => gn.version)</td>
+                    <td>@Html.DisplayFor(i => gn.addtime)</td>
+                    <td>@Html.DisplayFor(i => gn.ispublic)</td>
+                    <td>@Html.DisplayFor(i => gn.islock)</td>
+                    <td>
+                        @Html.ActionLink("编辑", "Edit", new { gnid = gn.gnid }, new { @class = "btn btn-info btn-xs" })
+
+                        <a href="javascript:void(0);" class="btn btn-warning btn-xs btnDel" data-yh='{"yhid":@gn.gnid,"yhmc":"@gn.actionname"}' title="删除功能">删除</a>
+
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@section js{
+    <script src="~/Assets/scripts/gnlist.js"></script>
+}
+
