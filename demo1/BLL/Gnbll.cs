@@ -41,9 +41,6 @@ namespace demo1.BLL
 
             return kvs;
         }
-        
-
-        //
         /// <summary>
         /// 通过controller获取aciton列表
         /// </summary>
@@ -52,13 +49,9 @@ namespace demo1.BLL
         public List<ViewModels.KeyValueDTO> getActionByController(string controller)
         {
             List<ViewModels.KeyValueDTO> kvs = new List<ViewModels.KeyValueDTO>();
-
             DAL.gn gndal = new DAL.gn();
-
             List<Model.gn> gns = gndal.getModelList("");
-
             var query = gns.Where(b => b.controller == controller).Where(b => b.ispublic == false).Where(b => b.islock==false);
-
             foreach(var item in query)
             {
                 kvs.Add(new ViewModels.KeyValueDTO
@@ -67,8 +60,6 @@ namespace demo1.BLL
                     value = item.actionname
                 });
             }
-
-
             return kvs;
         }
 
@@ -83,7 +74,7 @@ namespace demo1.BLL
         {
             DAL.gn gndal = new DAL.gn();
             List<Model.gn> gns = gndal.getModelList("");
-            return gns.Where(b => (b.controller == controller && b.action==action)).FirstOrDefault();
+            return gns.Where(b => (b.controller == controller && b.action==action && b.ispublic==false)).FirstOrDefault();
         }
 
         /// <summary>

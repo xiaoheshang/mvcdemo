@@ -25,6 +25,7 @@ namespace demo1.Controllers
             ViewModels.Message rsp = new ViewModels.Message();
             string username = fc["yhmc"];
             string password = fc["yhmm"];
+            
             //ViewBa.LgoginState = "登录后:"+username+","+password;
             DAL.yh yhdal = new DAL.yh();
             Model.yh yh = yhdal.GetModelByYhmc(username);
@@ -32,7 +33,12 @@ namespace demo1.Controllers
             {
                 FormsAuthentication.SetAuthCookie(username, false);
                 //设置Session
-                Session["yh"] = yh;
+                ViewModels.YhSession yhSession = new ViewModels.YhSession()
+                {
+                    yh = yh,
+                    currentXtid=8
+                };
+                Session["yhsession"] = yhSession;
                 //跳转
                 //return RedirectToAction("Index");
                 rsp.sno = 1;
@@ -50,7 +56,7 @@ namespace demo1.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            Session["yh"] = null;
+            Session["yhsession"] = null;
             return Redirect(Request.UrlReferrer.ToString());
         }
     }

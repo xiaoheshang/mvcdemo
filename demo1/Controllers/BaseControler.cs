@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace demo1.Controllers
 {
-    //[DemoAuthorize]
+    [DemoAuthorize]
     public class BaseController : Controller
     {
 

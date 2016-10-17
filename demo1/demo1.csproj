@@ -224,6 +224,7 @@
     <Compile Include="ViewModels\YhEditDTO.cs" />
     <Compile Include="ViewModels\YhgnDTO.cs" />
     <Compile Include="ViewModels\YhjsDTO.cs" />
+    <Compile Include="ViewModels\YhSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

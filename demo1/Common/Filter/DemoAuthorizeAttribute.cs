@@ -33,7 +33,6 @@ namespace demo1.Common
             //}
             //获取当前登录的用户名
             string curUser = httpContext.User.Identity.Name;
-
             //判断权限
             BLL.Gnbll gnbll = new BLL.Gnbll();
 
